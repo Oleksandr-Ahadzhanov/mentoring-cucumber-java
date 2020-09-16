@@ -1,13 +1,14 @@
-import base_tests.BaseTestChrome;
+package test_run_classes;
+
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = {"src/test/resource/login"}
+        features = {"src/test/resource"}
 )
 
-public class CheckLoginTest extends BaseTestChrome {
+public class TestRunClass {
 
 }
