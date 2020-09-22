@@ -11,7 +11,7 @@ import util.driver.Driver;
 public class StepDef {
 
 
-    private WebDriver driver = Driver.driver;
+    private WebDriver driver = Driver.initializeDriver();
     private SignInPageObjects homePage = new SignInPageObjects(driver);
 
 

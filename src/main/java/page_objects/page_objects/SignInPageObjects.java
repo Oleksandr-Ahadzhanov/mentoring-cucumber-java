@@ -14,11 +14,8 @@ public class SignInPageObjects extends BasePage {
     private String login = "ctc15testloy@gmail.com";
     private String password = "123321445";
 
-    private WebDriver driverHomePage;
-
     public SignInPageObjects(WebDriver driver) {
         super(driver);
-        this.driverHomePage=driver;
     }
 
     @FindBy(css="a.login")
@@ -51,7 +48,7 @@ public class SignInPageObjects extends BasePage {
     }
 
     public void signInIntoTheApp() {
-        waitImplicit(driverHomePage,5, TimeUnit.SECONDS);
+        waitImplicit(driverBasePage,5, TimeUnit.SECONDS);
         pressSignInButton();
         enterDataIntoEmailField(login);
         enterDataIntoPassField(password);
@@ -59,7 +56,7 @@ public class SignInPageObjects extends BasePage {
     }
 
     public void ifSignedInUserPageIsOpened(){
-        Boolean signedUserFieldIsPresent = driverHomePage.findElements(By.cssSelector("a.account")).size()>0;
+        Boolean signedUserFieldIsPresent = driverBasePage.findElements(By.cssSelector("a.account")).size()>0;
         if(signedUserFieldIsPresent) {
             System.out.println("Signed user page is opened");
         }

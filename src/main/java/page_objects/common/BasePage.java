@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 public abstract class BasePage {
 
 
-    private WebDriver driverBasePage;
+    protected WebDriver driverBasePage;
     public ConfigFileReader configFileReader;
 
     public BasePage(WebDriver driver){
