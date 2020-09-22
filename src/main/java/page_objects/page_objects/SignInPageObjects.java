@@ -2,6 +2,7 @@ package page_objects.page_objects;
 
 
 import net.serenitybdd.core.annotations.findby.FindBy;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -13,8 +14,11 @@ public class SignInPageObjects extends BasePage {
     private String login = "ctc15testloy@gmail.com";
     private String password = "123321445";
 
+    private WebDriver driverHomePage;
+
     public SignInPageObjects(WebDriver driver) {
         super(driver);
+        this.driverHomePage=driver;
     }
 
     @FindBy(css="a.login")
@@ -27,6 +31,8 @@ public class SignInPageObjects extends BasePage {
     private WebElement passField;
     @FindBy(css = "button#SubmitLogin")
     private WebElement submitLoginButton;
+    @FindBy(css = "a.account")
+    private WebElement accountHref;
 
     public void pressSignInButton() { signInButtonHomePage.click(); }
 
@@ -45,11 +51,18 @@ public class SignInPageObjects extends BasePage {
     }
 
     public void signInIntoTheApp() {
-        waitImplicit(driver,5, TimeUnit.SECONDS);
+        waitImplicit(driverHomePage,5, TimeUnit.SECONDS);
         pressSignInButton();
         enterDataIntoEmailField(login);
         enterDataIntoPassField(password);
         pressSubmitLoginButton();
+    }
+
+    public void ifSignedInUserPageIsOpened(){
+        Boolean signedUserFieldIsPresent = driverHomePage.findElements(By.cssSelector("a.account")).size()>0;
+        if(signedUserFieldIsPresent) {
+            System.out.println("Signed user page is opened");
+        }
     }
 
 }

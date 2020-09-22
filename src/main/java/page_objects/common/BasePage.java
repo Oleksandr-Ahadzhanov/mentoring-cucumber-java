@@ -7,10 +7,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import util.ConfigFileReader;
 import java.util.concurrent.TimeUnit;
 
-public class BasePage {
+public abstract class BasePage {
 
 
-    public WebDriver driver;
+    private WebDriver driverBasePage;
     public ConfigFileReader configFileReader;
 
     public BasePage(WebDriver driver){
@@ -18,7 +18,7 @@ public class BasePage {
     }
 
     public void init(final WebDriver driver) {
-        this.driver = driver;
+        this.driverBasePage = driver;
         PageFactory.initElements(driver, this);
     }
 
@@ -31,12 +31,18 @@ public class BasePage {
         wait.until(ExpectedConditions.urlToBe(url));
     }
 
-    public void openURL(String url) {
-        driver.get(configFileReader.getApplicationUrl());
-        waitForURL(driver,url);
-        driver.manage().window().maximize();
+    public void openURL() {
+        driverBasePage.get(configFileReader.getApplicationUrl());
+        waitForURL(driverBasePage,configFileReader.getApplicationUrl());
+        driverBasePage.manage().window().maximize();
     }
 
-
+    public void freeze(int seconds) {
+        try {
+            Thread.sleep(seconds * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

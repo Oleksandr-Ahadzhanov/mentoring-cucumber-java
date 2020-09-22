@@ -6,7 +6,9 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = {"src/test/resource"}
+        monochrome = true,
+        features = {"src/test/resource"},
+        glue = {"stepdefs"}
 )
 
 public class TestRunClass {
