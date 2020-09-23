@@ -11,6 +11,4 @@ import org.junit.runner.RunWith;
         glue = {"stepdefs"}
 )
 
-public class TestRunClass {
-
-}
+public class TestRunClass { }

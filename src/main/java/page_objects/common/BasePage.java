@@ -1,6 +1,8 @@
 package page_objects.common;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,31 +12,36 @@ import java.util.concurrent.TimeUnit;
 public abstract class BasePage {
 
 
-    protected WebDriver driverBasePage;
-    public ConfigFileReader configFileReader;
+    protected WebDriver driver;
+    private ConfigFileReader configFileReader = new ConfigFileReader();
 
     public BasePage(WebDriver driver){
         init(driver);
     }
 
-    public void init(final WebDriver driver) {
-        this.driverBasePage = driver;
+    private void init(final WebDriver driver) {
+        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
-    public static void waitImplicit (WebDriver driver, int amountOfTime, TimeUnit timeUnit) {
+    protected static void waitImplicit (WebDriver driver, int amountOfTime, TimeUnit timeUnit) {
         driver.manage().timeouts().implicitlyWait(amountOfTime, timeUnit);
     }
 
-    public void waitForURL (WebDriver driver,String url){
+    private void waitForURL (WebDriver driver,String url){
         WebDriverWait wait = new WebDriverWait(driver, configFileReader.getImplicitlyWait());
         wait.until(ExpectedConditions.urlToBe(url));
     }
 
+    protected void waitForElementToBeVisible (WebDriver driver, WebElement element, int timeoutInSeconds){
+        WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
     public void openURL() {
-        driverBasePage.get(configFileReader.getApplicationUrl());
-        waitForURL(driverBasePage,configFileReader.getApplicationUrl());
-        driverBasePage.manage().window().maximize();
+        driver.get(configFileReader.getApplicationUrl());
+        waitForURL(driver,configFileReader.getApplicationUrl());
+        driver.manage().window().maximize();
     }
 
     public void freeze(int seconds) {

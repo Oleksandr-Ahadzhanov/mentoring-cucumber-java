@@ -2,6 +2,7 @@ package page_objects.page_objects;
 
 
 import net.serenitybdd.core.annotations.findby.FindBy;
+import net.serenitybdd.core.annotations.findby.How;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,10 +19,11 @@ public class SignInPageObjects extends BasePage {
         super(driver);
     }
 
-    @FindBy(css="a.login")
-    @CacheLookup
-    private WebElement signInButtonHomePage;
-    @FindBy(css="input#email")
+//    @FindBy(css = "a.login]")
+//    @CacheLookup
+//    private WebElement signInButtonHomePage;
+
+    @FindBy(css ="input#email")
     @CacheLookup
     private WebElement emailField;
     @FindBy(css = "input#passwd")
@@ -31,24 +33,27 @@ public class SignInPageObjects extends BasePage {
     @FindBy(css = "a.account")
     private WebElement accountHref;
 
-    public void pressSignInButton() { signInButtonHomePage.click(); }
+    private void pressSignInButton() {
+        WebElement signInButtonHomePage = driver.findElement(By.cssSelector("a.login"));
+        waitForElementToBeVisible(driver,signInButtonHomePage,2);
+        signInButtonHomePage.click(); }
 
-    public void enterDataIntoEmailField(String data) {
+    private void enterDataIntoEmailField(String data) {
         emailField.clear();
         emailField.sendKeys(data);
     }
 
-    public void enterDataIntoPassField(String data) {
+    private void enterDataIntoPassField(String data) {
         passField.clear();
         passField.sendKeys(data);
     }
 
-    public void pressSubmitLoginButton() {
+    private void pressSubmitLoginButton() {
         submitLoginButton.click();
     }
 
     public void signInIntoTheApp() {
-        waitImplicit(driverBasePage,5, TimeUnit.SECONDS);
+        waitImplicit(driver,5, TimeUnit.SECONDS);
         pressSignInButton();
         enterDataIntoEmailField(login);
         enterDataIntoPassField(password);
@@ -56,10 +61,9 @@ public class SignInPageObjects extends BasePage {
     }
 
     public void ifSignedInUserPageIsOpened(){
-        Boolean signedUserFieldIsPresent = driverBasePage.findElements(By.cssSelector("a.account")).size()>0;
+        boolean signedUserFieldIsPresent = driver.findElements(By.cssSelector("a.account")).size()>0;
         if(signedUserFieldIsPresent) {
             System.out.println("Signed user page is opened");
         }
     }
-
 }
