@@ -1,8 +1,8 @@
 package page_objects.common;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -11,9 +11,8 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class BasePage {
 
-
     protected WebDriver driver;
-    private ConfigFileReader configFileReader = new ConfigFileReader();
+    protected ConfigFileReader configFileReader = new ConfigFileReader();
 
     public BasePage(WebDriver driver){
         init(driver);
@@ -44,6 +43,11 @@ public abstract class BasePage {
         driver.manage().window().maximize();
     }
 
+    protected void moveToElement(WebElement element){
+        Actions action = new Actions(driver);
+        action.moveToElement(element).build().perform();
+    }
+
     public void freeze(int seconds) {
         try {
             Thread.sleep(seconds * 1000);
@@ -51,5 +55,4 @@ public abstract class BasePage {
             e.printStackTrace();
         }
     }
-
 }

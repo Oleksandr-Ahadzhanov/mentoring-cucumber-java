@@ -1,18 +1,12 @@
 package util.driver;
 
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
 import org.openqa.selenium.WebDriver;
-
 import java.util.concurrent.TimeUnit;
 
 public class Driver {
 
     private static WebDriver driver;
 
-//    public Driver(){driver=initializeDriver();}
-
-    @Before
     public static WebDriver initializeDriver(){
         if(driver == null) {
             driver = DriverFactory.getDriver();
@@ -23,10 +17,13 @@ public class Driver {
         } return driver;
     }
 
-    @After
-    public void closeDriver(){
-//        driver.close();
-        driver.quit();
-        System.out.println("Driver is closed");
+    public static void closeDriver(WebDriver driver){
+        if(driver != null) {
+            driver.close();
+            driver.quit();
+            System.out.println("Driver is closed");
+        } else {
+            System.out.println("Something i wrong");
+        }
     }
 }

@@ -4,17 +4,6 @@ import java.io.*;
 import java.util.Properties;
 
 public class ConfigFileReader {
-//    private Properties properties;
-//    private final String propertyFilePath= "/src/main/resources/default.properties";
-
-//    private static String pathToAndroidConfigFile = "configsAndroid.properties";
-    private static String pathToConfigFile = "src/main/resources/default.properties";
-
-
-
-//    public static String getAndroidProperty (String key){
-//        return getPropertyFile(pathToAndroidConfigFile).getProperty(key);
-//    }
 
     private static Properties getPropertyFile(String pathToConfigFile) {
         Properties properties = new Properties();
@@ -26,8 +15,8 @@ public class ConfigFileReader {
         return properties;
     }
 
-
-    public static String getPropertyValue(String key) {
+    private static String getPropertyValue(String key) {
+        String pathToConfigFile = "src/main/resources/default.properties";
         return getPropertyFile(pathToConfigFile).getProperty(key);
     }
 
@@ -41,5 +30,23 @@ public class ConfigFileReader {
         String url = getPropertyValue("base_URL");
         if(url != null) return url;
         else throw new RuntimeException("url not specified in the default.properties file.");
+    }
+
+    public String getUserLogin() {
+        String url = getPropertyValue("login");
+        if(url != null) return url;
+        else throw new RuntimeException("Login not specified in the default.properties file.");
+    }
+
+    public String getUserPassword() {
+        String url = getPropertyValue("password");
+        if(url != null) return url;
+        else throw new RuntimeException("Login not specified in the default.properties file.");
+    }
+
+    public String getMockedProductName() {
+        String url = getPropertyValue("product376464");
+        if(url != null) return url;
+        else throw new RuntimeException("This product is not specified in the default.properties file.");
     }
 }
