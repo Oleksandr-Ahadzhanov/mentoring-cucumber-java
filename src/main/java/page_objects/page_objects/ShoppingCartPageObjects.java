@@ -1,5 +1,6 @@
 package page_objects.page_objects;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,9 +10,8 @@ import page_objects.common.BasePage;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 public class ShoppingCartPageObjects extends BasePage {
-
-//    private String expectedProductName = "Faded Short Sleeve T-shirts";
 
     public ShoppingCartPageObjects(WebDriver driver) {
         super(driver);
@@ -41,12 +41,12 @@ public class ShoppingCartPageObjects extends BasePage {
 
     private void addToCartTheProduct() {
         moveToElement(productContainer);
-        waitForElementToBeVisible(driver,addToCartButton,2);
+        waitForElementToBeVisible(driver,addToCartButton,5);
         addToCartButton.click();
     }
 
     private void closeAddToCartPopup() {
-        waitForElementToBeVisible(driver,crossButton,2);
+        waitForElementToBeVisible(driver,crossButton,5);
         crossButton.click();
     }
 
@@ -55,13 +55,13 @@ public class ShoppingCartPageObjects extends BasePage {
     }
 
     public void addProductToCartAndOpenShoppingCart(){
-        waitImplicit(driver,3, TimeUnit.SECONDS);
+        waitImplicit(driver,5, TimeUnit.SECONDS);
         pressTShirtsButton();
-        waitForElementToBeVisible(driver,productContainer,2);
+        waitForElementToBeVisible(driver,productContainer,10);
         addToCartTheProduct();
-        waitForElementToBeVisible(driver,crossButton,2);
+        waitForElementToBeVisible(driver,crossButton,10);
         closeAddToCartPopup();
-        waitForElementToBeVisible(driver,shoppingCartButton,2);
+        waitForElementToBeVisible(driver,shoppingCartButton,10);
         openShCart();
     }
 
@@ -77,6 +77,6 @@ public class ShoppingCartPageObjects extends BasePage {
     public void checkIfProductIsAddedToCart() {
         String actualName = productName.getText();
         Assert.assertEquals ("Something is wrong!!!",configFileReader.getMockedProductName(),actualName);
-        System.out.println("The product <" + actualName + "> is added to the Cart");
+        log.info("The product <" + actualName + "> is added to the Cart");
     }
 }

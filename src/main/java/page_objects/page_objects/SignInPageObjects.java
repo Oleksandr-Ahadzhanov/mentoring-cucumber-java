@@ -1,5 +1,6 @@
 package page_objects.page_objects;
 
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +11,7 @@ import page_objects.common.BasePage;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 public class SignInPageObjects extends BasePage {
 
     public SignInPageObjects(WebDriver driver) {
@@ -49,7 +51,7 @@ public class SignInPageObjects extends BasePage {
     }
 
     public void signInIntoTheApp() {
-        waitImplicit(driver,5, TimeUnit.SECONDS);
+        waitImplicit(driver,10, TimeUnit.SECONDS);
         pressSignInButton();
         enterDataIntoEmailField(configFileReader.getUserLogin());
         enterDataIntoPassField(configFileReader.getUserPassword());
@@ -59,7 +61,7 @@ public class SignInPageObjects extends BasePage {
     public void ifSignedInUserPageIsOpened(){
         boolean signedUserFieldIsPresent = accountHref.size()>0;
         if(signedUserFieldIsPresent) {
-            System.out.println("Signed user page is opened");
-        } else {System.out.println("Signed user page is NOT opened");}
+            log.info("Signed user page is opened");
+        } else {log.info("Signed user page is NOT opened");}
     }
 }
