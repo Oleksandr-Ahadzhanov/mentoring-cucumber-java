@@ -1,7 +1,6 @@
 package page_objects.page_objects;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -29,11 +28,8 @@ public class ShoppingCartPageObjects extends BasePage {
     private WebElement crossButton;
     @FindBy(css = "a[title~=shopping]")
     private WebElement shoppingCartButton;
-    @FindBy(css = "td p.product-name a")
-    private WebElement productName;
-
-//    @FindBy(css = "tr#product_1_1_0_376464")
-//    private List<WebElement> mockedProduct;
+    @FindBy(css = "table#cart_summary tbody tr")
+    private List<WebElement> listOfMockedProducts;
 
     private void pressTShirtsButton() {
         tShirtsButton.click();
@@ -65,18 +61,14 @@ public class ShoppingCartPageObjects extends BasePage {
         openShCart();
     }
 
-//    public void checkIfProductIsAddedToCart(){
-//        boolean productIsAdded = mockedProduct.size()>0;
-//        if (productIsAdded) {
-//            System.out.println("Product is added to cart");
-//        } else {
-//            System.out.println("Product is NOT added to cart");
-//        }
-//    }
-
-    public void checkIfProductIsAddedToCart() {
-        String actualName = productName.getText();
-        Assert.assertEquals ("Something is wrong!!!",configFileReader.getMockedProductName(),actualName);
-        log.info("The product <" + actualName + "> is added to the Cart");
+    public void checkIfProductIsAddedToCart(){
+        boolean productIsAdded = listOfMockedProducts.size()>0;
+        if (productIsAdded) {
+            System.out.println("Product is added to cart");
+            System.out.println("First product \"id\" is: "+listOfMockedProducts.get(0).getAttribute("id"));
+        } else {
+            System.out.println("Product is NOT added to cart");
+        }
     }
+
 }

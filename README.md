@@ -1,7 +1,6 @@
 # Automation test framework
 
-**BDD automation test framework**  - Create Shopping List feature is covered by automation scripts with @UI tags, also there are two scripts which cover create, get, and delete
-Shopping List API functionality which is marked by @API tags. 
+**BDD automation test framework**  - User Login and Add product to Shopping Cart features are covered by automation scripts.
 
 Table of contents
 =================
@@ -25,23 +24,19 @@ Table of contents
 ## Test scenario example
 
 ```java
-  Scenario: check deletening Shopping list functionality
-    Given post new Shopping list
-    When delete Shopping list by id
-    And get Shopping List by id after deleting Shopping list
-    Then verify that code response 400
-    And verify that response message is 'shoppingList.notFound'
+  Scenario: Demonstrating that user is able to sign in into the App
+      Given I am on the Home page
+      When I do sign in
+      Then I am signed in user
 ```
 
 ## Test step example
 
 ```java
-     @When("fill in {string}")
-     public void fillInCredentials(String fieldName) {
-         String usernamePassword = getSystemPropertyByName(fieldName);
-         signUpPage.fillInCredentials(fieldName, usernamePassword);
-     }
-
+     @When("^I do sign in$")
+         public void sign_in_into_the_app() {
+             homePage.signInIntoTheApp();
+         }
 ```
 
 ## Test runner
@@ -49,22 +44,15 @@ Table of contents
 ```java
 @RunWith(Cucumber.class)
 @CucumberOptions(
-    features = "src/test/resources",
-    glue = "stepDefs",
-    plugin = {"pretty", "html:target/cucumber"})
-public class RunCucumberTest {
-
-}
+        monochrome = true,
+        features = {"src/test/resources/features"},
+        glue = {"stepdefs"}
+)
 ```
 
 ## Run options
  * Locally via IDE (To run separate scenario you need Cucumber Java plugin to be installed)
- * Possible to select browser (Chrome or FireFox) by cucumber options (ex. -Ddriver="firefox") - Chrome by default
- * Maven (possible to run tests separately by @tags):
- 
-```bash
-   'mvn clean test mvn clean test -Dcucumber.options="--tags @API"' or 'mvn clean test mvn clean test -Dcucumber.options="--tags @UI"'
-   'mvn clean test' - will run all tests
-```
+ * Maven (possible to run tests by 'mvn clean test' command in Windows cmd).
+
 ## Report
- * Report is located in target/cucumber/index.html
+ * Report is located in target/allure-results
