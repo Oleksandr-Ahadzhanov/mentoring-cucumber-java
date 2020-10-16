@@ -33,8 +33,11 @@ public class ShoppingCartPageObjects extends BasePage {
     private WebElement shoppingCartButton;
     @FindBy(css = "table#cart_summary tbody tr")
     private List<WebElement> listOfMockedProducts;
+//    @FindBy(css = ".//tbody")
+//    private WebElementFacade table;
 
-//    private WebElementFacade table =  By.xpath(".//tbody");
+
+    private WebElementFacade table =  driver.findElement(By.xpath(".//tbody"));
 
     private void pressTShirtsButton() {
         tShirtsButton.click();
@@ -79,7 +82,7 @@ public class ShoppingCartPageObjects extends BasePage {
 
 @SneakyThrows
     public void encreaseQuantity() {
-        CartTable cartTable = new CartTable();
+        CartTable cartTable = new CartTable(table);
         cartTable.getProductQuantityIncrease().click();
         Thread.sleep(5000);
     }
