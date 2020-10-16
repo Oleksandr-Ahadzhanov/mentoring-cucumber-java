@@ -1,6 +1,9 @@
 package page_objects.page_objects;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import net.serenitybdd.core.pages.WebElementFacade;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -30,6 +33,8 @@ public class ShoppingCartPageObjects extends BasePage {
     private WebElement shoppingCartButton;
     @FindBy(css = "table#cart_summary tbody tr")
     private List<WebElement> listOfMockedProducts;
+
+//    private WebElementFacade table =  By.xpath(".//tbody");
 
     private void pressTShirtsButton() {
         tShirtsButton.click();
@@ -69,6 +74,14 @@ public class ShoppingCartPageObjects extends BasePage {
         } else {
             System.out.println("Product is NOT added to cart");
         }
+    }
+
+
+@SneakyThrows
+    public void encreaseQuantity() {
+        CartTable cartTable = new CartTable();
+        cartTable.getProductQuantityIncrease().click();
+        Thread.sleep(5000);
     }
 
 }
