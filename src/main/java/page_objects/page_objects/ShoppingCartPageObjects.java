@@ -2,8 +2,6 @@ package page_objects.page_objects;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import net.serenitybdd.core.pages.WebElementFacade;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -33,11 +31,15 @@ public class ShoppingCartPageObjects extends BasePage {
     private WebElement shoppingCartButton;
     @FindBy(css = "table#cart_summary tbody tr")
     private List<WebElement> listOfMockedProducts;
-//    @FindBy(css = ".//tbody")
-//    private WebElementFacade table;
+    @FindBy(xpath = "//table[@id='cart_summary']/tbody")
+    private WebElement table;
+
+//    private CartTable cartTable;
+    private String totalPriceBefore;
+    private String totalPriceAfter;
 
 
-    private WebElementFacade table =  driver.findElement(By.xpath(".//tbody"));
+//    private WebElement table =  driver.findElement(By.xpath("//tbody"));
 
     private void pressTShirtsButton() {
         tShirtsButton.click();
@@ -74,17 +76,25 @@ public class ShoppingCartPageObjects extends BasePage {
         if (productIsAdded) {
             System.out.println("Product is added to cart");
             System.out.println("First product \"id\" is: "+listOfMockedProducts.get(0).getAttribute("id"));
+            showTotalPrice();
         } else {
             System.out.println("Product is NOT added to cart");
         }
     }
 
-
-@SneakyThrows
-    public void encreaseQuantity() {
+    @SneakyThrows
+    public void increaseQuantity() {
+//        waitForElementToBeVisible(driver,table,10);
         CartTable cartTable = new CartTable(table);
         cartTable.getProductQuantityIncrease().click();
+        showTotalPrice();
         Thread.sleep(5000);
+    }
+
+    public void showTotalPrice() {
+        CartTable cartTable = new CartTable(table);
+        System.out.println("Product total price is: " + cartTable.getProductTotal());
+        System.out.println();
     }
 
 }

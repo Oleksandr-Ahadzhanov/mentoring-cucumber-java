@@ -33,7 +33,7 @@ public class StepDef {
     @When("^I add the Product to the Shopping Cart$")
     public void add_product_to_cart() {
         shoppingCart.addProductToCartAndOpenShoppingCart();
-//        shoppingCart.encreaseQuantity();
+        shoppingCart.increaseQuantity();
     }
     @Then("^The product is added to the Shopping Cart$")
     public void check_if_product_is_added() {
