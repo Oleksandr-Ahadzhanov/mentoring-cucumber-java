@@ -88,7 +88,7 @@ public class ShoppingCartPageObjects extends BasePage {
         CartTable cartTable = new CartTable(table);
         cartTable.getProductQuantityIncrease().click();
         showTotalPrice();
-//        Thread.sleep(5000);
+        Thread.sleep(2000);
     }
 
     public void showTotalPrice() {
