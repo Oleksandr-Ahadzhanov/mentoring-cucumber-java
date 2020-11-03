@@ -27,8 +27,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 @Slf4j
 public class RestAssuredMain {
 
-    private static String json = "json file";
-
     public static void getRequest(@NonNull String endPoint) {
         RequestSpecification reqSpec = getContext(HTTP_REQUEST_SPECIFICATION);
         Response rawResponse = given()
@@ -43,8 +41,7 @@ public class RestAssuredMain {
         RequestSpecification reqSpec = getContext(HTTP_REQUEST_SPECIFICATION);
         Response rawResponse = given()
                 .spec(reqSpec)
-                .body(json)
-//                .body(new File(request).exists() ? readFileAsString(request) : request)
+                .body(new File(request).exists() ? readFileAsString(request) : request)
                 .when()
                 .post(endPoint);
         log.info("Response body of POST request is: " + rawResponse.body().prettyPrint());
@@ -55,8 +52,7 @@ public class RestAssuredMain {
         RequestSpecification reqSpec = getContext(HTTP_REQUEST_SPECIFICATION);
         Response rawResponse = given()
                 .spec(reqSpec)
-                .body(json)
-//                .body(new File(request).exists() ? new File(request) : request)
+                .body(new File(request).exists() ? new File(request) : request)
                 .when()
                 .put(endPoint);
         log.info("Response body of PUT request is: " + rawResponse.body().prettyPrint());

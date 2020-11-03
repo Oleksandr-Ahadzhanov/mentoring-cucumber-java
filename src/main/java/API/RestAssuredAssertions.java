@@ -43,4 +43,11 @@ public class RestAssuredAssertions {
         MultipleUserModel getResp = response.getBody().as(MultipleUserModel.class);
         assertThat(getResp.getData().get(1).getEmail(), equalTo("lindsay.ferguson@reqres.in"));
     }
+
+    public static void checkIfResponseStatusCodeIs201() {
+        Response response = getContext(HTTP_RESPONSE);
+        response
+                .then()
+                .statusCode(201);
+    }
 }

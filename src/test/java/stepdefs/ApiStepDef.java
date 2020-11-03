@@ -34,14 +34,21 @@ public class ApiStepDef {
     public void send_new_request_to_the_api() {
         RestAssuredMain.getRequest("/api/users?page=2");
     }
-
     @And("^Response body is equal to listOfUsers.json$")
     public void check_multiply_user_response_body(){
         RestAssuredAssertions.checkIfResponseBodyIsEqualToMultiplyUserTestDataFile();
     }
-
     @And("^Response body contains data-1.email filed with lindsay.ferguson@reqres.in value$")
     public void check_matches_of_values_for_multiply_users(){
         RestAssuredAssertions.checkIfResponseDataIsEqualToMultiplyUserTestDefinition();
+    }
+
+    @When("^User sends POST request to /api/users with body post.json$")
+    public void send_POST_request_to_the_api() {
+        RestAssuredMain.postRequest("/api/users","src/test/resources/test_data/post.json");
+    }
+    @Then("^Status Code is 201$")
+    public void check_if_status_code_is_201(){
+        RestAssuredAssertions.checkIfResponseStatusCodeIs201();
     }
 }
