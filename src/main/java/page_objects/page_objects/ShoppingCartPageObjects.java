@@ -34,13 +34,6 @@ public class ShoppingCartPageObjects extends BasePage {
     @FindBy(xpath = "//table[@id='cart_summary']/tbody")
     private WebElement table;
 
-//    private CartTable cartTable;
-    private String totalPriceBefore;
-    private String totalPriceAfter;
-
-
-//    private WebElement table =  driver.findElement(By.xpath("//tbody"));
-
     private void pressTShirtsButton() {
         tShirtsButton.click();
     }
@@ -74,8 +67,8 @@ public class ShoppingCartPageObjects extends BasePage {
     public void checkIfProductIsAddedToCart(){
         boolean productIsAdded = listOfMockedProducts.size()>0;
         if (productIsAdded) {
-            System.out.println("Product is added to cart");
-            System.out.println("First product \"id\" is: "+listOfMockedProducts.get(0).getAttribute("id"));
+            log.info("Product is added to cart");
+            log.info("First product \"id\" is: "+listOfMockedProducts.get(0).getAttribute("id"));
             showTotalPrice();
         } else {
             System.out.println("Product is NOT added to cart");
@@ -84,16 +77,15 @@ public class ShoppingCartPageObjects extends BasePage {
 
     @SneakyThrows
     public void increaseQuantity() {
-//        waitForElementToBeVisible(driver,table,10);
         CartTable cartTable = new CartTable(table);
         cartTable.getProductQuantityIncrease().click();
         showTotalPrice();
         Thread.sleep(2000);
     }
 
-    public void showTotalPrice() {
+    private void showTotalPrice() {
         CartTable cartTable = new CartTable(table);
-        System.out.println("Product total price is: " + cartTable.getProductTotal());
+        log.info("Product total price is: " + cartTable.getProductTotal());
         System.out.println();
     }
 

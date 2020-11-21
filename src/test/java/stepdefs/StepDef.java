@@ -13,6 +13,12 @@ public class StepDef {
     private SignInPageObjects homePage = new SignInPageObjects(getDriver());
     private ShoppingCartPageObjects shoppingCart = new ShoppingCartPageObjects(getDriver());
 
+    @Given("Step from {string} in {string} feature file")
+    public void step(String scenario, String file) {
+        System.out.format("Thread ID - %2d - %s from %s feature file.\n",
+                Thread.currentThread().getId(), scenario,file);
+    }
+
     @Given("^I am on the Home page$")
     public void app_home_page_is_opened() {
         homePage.openURL();

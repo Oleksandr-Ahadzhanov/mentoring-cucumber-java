@@ -9,6 +9,12 @@ import cucumber.api.java.en.When;
 
 public class ApiStepDef {
 
+//    @Given("Step from {string} in {string} feature file")
+//    public void step(String scenario, String file) {
+//        System.out.format("Thread ID - %2d - %s from %s feature file.\n",
+//                Thread.currentThread().getId(), scenario,file);
+//    }
+
     @Given("^User sets the link and contentType for request$")
     public void the_link_and_contextType_are_ready() {
         RestAssuredMain.setupRequestSpecification("https://reqres.in", "json");
@@ -27,7 +33,7 @@ public class ApiStepDef {
     }
     @And("^Response body contains FIRST_NAME filed with JANET value$")
     public void check_matches_of_values(){
-        RestAssuredAssertions.checkIfResponseDataIsEqualToMultiplyUserTestDefinition();
+        RestAssuredAssertions.checkIfResponseDataIsEqualToTestDefinition();
     }
 
     @When("^User sends GET request to /api/users/page=2 api$")
@@ -45,7 +51,7 @@ public class ApiStepDef {
 
     @When("^User sends POST request to /api/users with body post.json$")
     public void send_POST_request_to_the_api() {
-        RestAssuredMain.postRequest("/api/users","src/test/resources/test_data/post.json");
+        RestAssuredMain.postRequest("/api/users","src/test/resources/post.json");
     }
     @Then("^Status Code is 201$")
     public void check_if_status_code_is_201(){

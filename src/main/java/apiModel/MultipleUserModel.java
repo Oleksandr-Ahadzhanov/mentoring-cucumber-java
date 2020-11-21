@@ -1,6 +1,6 @@
 package apiModel;
 
-import apiModel.reqres_model_parts.SingleUserAd;
+import apiModel.reqres_model_parts.SingleUserSupport;
 import apiModel.reqres_model_parts.SingleUserData;
 import java.util.List;
 
@@ -10,16 +10,16 @@ public class MultipleUserModel {
     private int per_page;
     private int total;
     private int total_pages;
-    private SingleUserAd ad;
+    private SingleUserSupport support;
     private List<SingleUserData> data;
 
     public MultipleUserModel(){}
-    public MultipleUserModel(int page, int per_page, int total, int total_pages, SingleUserAd ad, List<SingleUserData> data) {
+    public MultipleUserModel(int page, int per_page, int total, int total_pages, SingleUserSupport support, List<SingleUserData> data) {
         this.page = page;
         this.per_page = per_page;
         this.total = total;
         this.total_pages = total_pages;
-        this.ad = ad;
+        this.support = support;
         this.data = data;
     }
 
@@ -55,12 +55,12 @@ public class MultipleUserModel {
         this.total_pages = total_pages;
     }
 
-    public SingleUserAd getAd() {
-        return ad;
+    public SingleUserSupport getSupport() {
+        return support;
     }
 
-    public void setAd(SingleUserAd ad) {
-        this.ad = ad;
+    public void setSupport(SingleUserSupport ad) {
+        this.support = ad;
     }
 
     public List<SingleUserData> getData() {

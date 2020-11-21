@@ -1,17 +1,17 @@
 package apiModel;
 
-import apiModel.reqres_model_parts.SingleUserAd;
+import apiModel.reqres_model_parts.SingleUserSupport;
 import apiModel.reqres_model_parts.SingleUserData;
 
 public class SingleUserModel {
 
     private SingleUserData data;
-    private SingleUserAd ad;
+    private SingleUserSupport support;
 
     public SingleUserModel() {}
-    public SingleUserModel(SingleUserData data, SingleUserAd ad) {
+    public SingleUserModel(SingleUserData data, SingleUserSupport support) {
         this.data = data;
-        this.ad = ad;
+        this.support = support;
     }
 
     public SingleUserData getData() {
@@ -22,11 +22,11 @@ public class SingleUserModel {
         this.data = data;
     }
 
-    public SingleUserAd getAd() {
-        return ad;
+    public SingleUserSupport getSupport() {
+        return support;
     }
 
-    public void setAd(SingleUserAd ad) {
-        this.ad = ad;
+    public void setSupport(SingleUserSupport support) {
+        this.support = support;
     }
 }

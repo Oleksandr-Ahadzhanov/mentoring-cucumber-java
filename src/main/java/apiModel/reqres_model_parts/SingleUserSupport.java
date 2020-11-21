@@ -1,25 +1,15 @@
 package apiModel.reqres_model_parts;
 
-public class SingleUserAd {
+public class SingleUserSupport {
 
-    private String company;
     private String url;
     private String text;
 
-    public SingleUserAd() {}
+    public SingleUserSupport() {}
 
-    public SingleUserAd(String company, String url, String text) {
-        this.company = company;
+    public SingleUserSupport(String url, String text) {
         this.url = url;
         this.text = text;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
     }
 
     public String getUrl() {

@@ -8,7 +8,8 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         monochrome = true,
         features = {"src/test/resources/features"},
-        glue = {"stepdefs"}
+        glue = {"stepdefs"},
+        dryRun = false
 )
 
 public class TestRunClass { }
